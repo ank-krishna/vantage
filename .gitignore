@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+.pytest_cache/
+data_raw/*.parquet
+data_store/*.duckdb
+results/*.png
+results/*.json
+.venv/

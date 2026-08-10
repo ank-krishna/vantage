@@ -1,0 +1,26 @@
+# core
+duckdb==1.5.5
+pandas==3.0.2
+numpy==2.4.4
+pyarrow==25.0.0
+scikit-learn==1.8.0
+
+# real data (optional — synthetic generator needs none of this)
+yfinance==1.5.2
+
+# live market data (optional — needed for real-time feed)
+websocket-client==1.8.0
+finnhub-python==2.4.20
+
+# online store (fakeredis runs without a server; redis is the prod client)
+fakeredis==2.37.0
+redis==8.1.0
+
+# serving + reporting
+fastapi==0.141.1
+uvicorn==0.52.1
+matplotlib==3.10.8
+
+# dev
+pytest==9.1.1
+httpx==0.28.1
