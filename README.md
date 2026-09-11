@@ -2,13 +2,11 @@
 
 ## The Problem
 
-Imagine you build a model that predicts whether a stock will go up tomorrow. You train it on historical data, backtest it, and the numbers look incredible — 62% accuracy, a Sharpe ratio above 4. You'd bet real money on that. So you deploy it.
+Imagine you build a model that predicts whether a stock will go up tomorrow. You train it on historical data, backtest it, and the numbers look incredible: 62% accuracy, a Sharpe ratio above 4. You're confident, so you deploy it. But nothing works-
 
-Then nothing works.
+The model isn't broken. The data is. During training, your pipeline quietly peeked at information it shouldn't have had, which was tomorrow's price revisions baked into today's features, statistics computed over the entire dataset instead of only the past. The model learned patterns that were real in hindsight but impossible to know at the time. In production, where you only have what you know *right now*, those patterns don't exist.
 
-The model isn't broken. The data is. During training, your pipeline quietly peeked at information it shouldn't have had — tomorrow's price revisions baked into today's features, statistics computed over the entire dataset instead of only the past. The model learned patterns that were real in hindsight but impossible to know at the time. In production, where you only have what you know *right now*, those patterns don't exist. The edge was never real. It was a ghost.
-
-This is called **online/offline skew** — when the data your model trains on and the data it sees in production silently disagree. It's one of the most common and expensive failures in applied machine learning, and it's hard to catch because everything *looks* fine until you're live and losing money.
+This is called **online/offline skew** : when the data your model trains on and the data it sees in production silently disagree. It's one of the most common and expensive failures in applied machine learning, and it's hard to catch because everything *looks* fine until you're live and losing money.
 
 **marketstore** is a feature store built to make this impossible. It enforces a simple rule: a feature value can only be used if it was actually knowable at the time of the decision. It proves this guarantee mathematically, demonstrates exactly what breaks without it, and now includes a real-time live market data feed so you can watch the system work against actual prices.
 
